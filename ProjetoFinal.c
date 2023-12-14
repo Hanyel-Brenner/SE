@@ -23,7 +23,9 @@ void main() {
 char input;
 int isPressed = 0;
 int counter = 0;
+int i;
 char password[4];
+UART1_Init(9600);
 Lcd_Init();                               //Inicializa módulo LCD
  Lcd_Cmd(_LCD_CURSOR_OFF);                 //Apaga cursor
  Lcd_Cmd(_LCD_CLEAR);
@@ -86,11 +88,14 @@ PORTD.RD0 = 1;
 
               isPressed = 0;
 
-              if(counter == 4){ counter = 0; Control = 1;}  //Now that the password was typed, we compare it with real password
+              if(counter == 4){ counter = 0; Control = 1;}  //Now that the password was typed, we send it to Arduino.
               
           break;
               
-          case 1:
+          case 1:       //manda a password para o arduino fazer a verificação
+               for(i=0; i<4; i++){
+                       UART1_Write(password[i]);
+               }
           break;
         }
 
