@@ -107,7 +107,7 @@ PORTD.RD0 = 1;
                ADCON0 = 0b00001001;  //bit 1 is set to 1 manually to start conversion and when conversion finishes it is automatically set to 0
                ADCON1 = 0b00001100;  //seta quais dos pinos receberão dados digitais ou analogicos.
                ADCON2 = 0b10000000;  //justificado á direita para usarmos apenas o ADRESL
-               TRISA.RA2 = 1; //AN2 é entrada pois recebe a temperatura do sensor LM35
+               TRISA.RA4 = 1; //AN2 é entrada pois recebe a temperatura do sensor LM35
                
                while(1){
                   ADCON0 = 0b00001011;
