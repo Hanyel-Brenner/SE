@@ -23,7 +23,8 @@ void main() {
 char input;
 int isPressed = 0;
 int counter = 0;
-int i;
+int i; //contador de loop qualquer (irrelevante, ignore)
+int temperature = 0;  //valor da temperatura lido do sensor LM35 do PIC
 char password[4];
 UART1_Init(9600);
 Lcd_Init();                               //Inicializa módulo LCD
@@ -96,7 +97,34 @@ PORTD.RD0 = 1;
                for(i=0; i<4; i++){
                        UART1_Write(password[i]);
                }
+                       Control = 2;
           break;
+          
+          case 2:
+               TRISC.RC2 = 0;  //define o pino da ventoinha ventoinha como saida, isto é CCP1 pode ser usado para mandar um sinal pwm
+               PWM1_Init(4000);
+          
+               ADCON0 = 0b00001001;  //bit 1 is set to 1 manually to start conversion and when conversion finishes it is automatically set to 0
+               ADCON1 = 0b00001100;  //seta quais dos pinos receberão dados digitais ou analogicos.
+               ADCON2 = 0b10000000;  //justificado á direita para usarmos apenas o ADRESL
+               TRISA.RA2 = 1; //AN2 é entrada pois recebe a temperatura do sensor LM35
+               
+               while(1){
+                  ADCON0 = 0b00001011;
+                  while(ADCON0 == 0b00001011);
+                  temperature = ADRES ;
+                  
+                  //if(temperature > 200){  //se a temperatura passa de um threshold arbitrario entao a ventoinha roda conforme a regra abaixo estabelecida, considerando que o valor da temperatura varia de 0 a 1024 apos a conversao com resolucao de 10 bits.
+                     PWM1_Set_Duty((temperature/1024)*255);
+                     PWM1_Start();
+                     Delay_ms(500);
+                     PWM1_Stop();
+                  //}
+               }
+
+               
+          break;
+          
         }
 
       }
