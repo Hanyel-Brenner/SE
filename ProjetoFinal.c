@@ -44,7 +44,10 @@ PORTD.RD0 = 1;
    while(1){
       switch(Control){
          case 0:
-         while(1){
+         while(1){    // the objective is to stop entering this loop only when user types 4 keys which is password size
+         
+         if(counter == 4) break;
+         
             PORTB.RB2 = 0;  //habilita primeira coluna do teclado
 
             if(Button(&PORTD,3,50,0) && PORTB.RB2 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f3 == 0){counter = counter;} input = '3'; counter++; break; }
@@ -67,11 +70,9 @@ PORTD.RD0 = 1;
               if(Button(&PORTD,1,50,0) && PORTB.RB0 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f1 == 0){counter = counter;} input = '7'; counter++; break; }
             PORTB.RB0 = 1;
 
-        }
-        break;
-            }
+                 }
 
-              if(input == '0' ){Lcd_Out_Cp("0"); }
+               if(input == '0' ){Lcd_Out_Cp("0"); }
               if(input == '1' ){Lcd_Out_Cp("1"); }
               if(input == '2' ){Lcd_Out_Cp("2"); }
               if(input == '3' ){Lcd_Out_Cp("3"); }
@@ -83,6 +84,13 @@ PORTD.RD0 = 1;
               if(input == '9' ){Lcd_Out_Cp("9"); }
 
               isPressed = 0;
+
+              if(counter == 4){ counter = 0; Control = 1;}  //Now that the password was typed, we compare it with real password
+              
+              break;
+        }
+
+
       }
 
 
