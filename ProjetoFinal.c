@@ -21,10 +21,9 @@ int Control = 0;
 
 void main() {
 char input;
-int current = 0, previous = 0;
 int isPressed = 0;
 int counter = 0;
-int pressedButton = -1;
+char password[4];
 Lcd_Init();                               //Inicializa módulo LCD
  Lcd_Cmd(_LCD_CURSOR_OFF);                 //Apaga cursor
  Lcd_Cmd(_LCD_CLEAR);
@@ -70,9 +69,9 @@ PORTD.RD0 = 1;
               if(Button(&PORTD,1,50,0) && PORTB.RB0 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f1 == 0){counter = counter;} input = '7'; counter++; break; }
             PORTB.RB0 = 1;
 
-                 }
+               }
 
-               if(input == '0' ){Lcd_Out_Cp("0"); }
+              if(input == '0' ){Lcd_Out_Cp("0"); }
               if(input == '1' ){Lcd_Out_Cp("1"); }
               if(input == '2' ){Lcd_Out_Cp("2"); }
               if(input == '3' ){Lcd_Out_Cp("3"); }
@@ -83,13 +82,17 @@ PORTD.RD0 = 1;
               if(input == '8' ){Lcd_Out_Cp("8"); }
               if(input == '9' ){Lcd_Out_Cp("9"); }
 
+              password[counter-1] = input;
+
               isPressed = 0;
 
               if(counter == 4){ counter = 0; Control = 1;}  //Now that the password was typed, we compare it with real password
               
-              break;
+          break;
+              
+          case 1:
+          break;
         }
-
 
       }
 
