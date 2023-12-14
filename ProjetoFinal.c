@@ -44,43 +44,43 @@ PORTD.RD0 = 1;
    while(1){
       switch(Control){
          case 0:
-         
+         while(1){
             PORTB.RB2 = 0;  //habilita primeira coluna do teclado
 
-            if(Button(&PORTD,3,50,0) && PORTB.RB2 ==0 && isPressed == 0){input = '3'; isPressed = 1; }
-            if(Button(&PORTD,2,50,0) && PORTB.RB2 ==0 && isPressed == 0){input = '6'; isPressed = 1; }
-            if(Button(&PORTD,1,50,0) && PORTB.RB2 ==0 && isPressed == 0){input = '9'; isPressed = 1; }
+            if(Button(&PORTD,3,50,0) && PORTB.RB2 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f3 == 0){counter = counter;} input = '3'; counter++; break; }
+            if(Button(&PORTD,2,50,0) && PORTB.RB2 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f2 == 0){counter = counter;} input = '6'; counter++; break; }
+            if(Button(&PORTD,1,50,0) && PORTB.RB2 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f1 == 0){counter = counter;} input = '9'; counter++; break; }
 
             PORTB.RB2 = 1;
             PORTB.RB1 = 0;  //habilita segunda coluna do teclado
 
-            if(Button(&PORTD,3,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '2'; isPressed = 1; }
-            if(Button(&PORTD,2,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '5'; isPressed = 1; }
-            if(Button(&PORTD,1,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '8'; isPressed = 1; }
-            if(Button(&PORTD,0,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '0'; isPressed = 1; }
+            if(Button(&PORTD,3,50,0) && PORTB.RB1 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f3 == 0){counter = counter;} input = '2'; counter++; break; }
+            if(Button(&PORTD,2,50,0) && PORTB.RB1 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f2 == 0){counter = counter;} input = '5'; counter++; break; }
+            if(Button(&PORTD,1,50,0) && PORTB.RB1 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f1 == 0){counter = counter;} input = '8'; counter++; break; }
+            if(Button(&PORTD,0,50,0) && PORTB.RB1 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f0 == 0){counter = counter;} input = '0'; counter++; break; }
 
 
             PORTB.RB1 = 1;
             PORTB.RB0 = 0;  //habilita terceira coluna do teclado
-              if(Button(&PORTD,3,50,0) && PORTB.RB0 ==0 && isPressed == 0){input = '1'; isPressed = 1; }
-              if(Button(&PORTD,2,50,0) && PORTB.RB0 ==0 && isPressed == 0){input = '4'; isPressed = 1; }
-              if(Button(&PORTD,1,50,0) && PORTB.RB0 ==0 && isPressed == 0){input = '7'; isPressed = 1; }
+              if(Button(&PORTD,3,50,0) && PORTB.RB0 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f3 == 0){counter = counter;} input = '1'; counter++; break; }
+              if(Button(&PORTD,2,50,0) && PORTB.RB0 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f2 == 0){counter = counter;} input = '4'; counter++; break; }
+              if(Button(&PORTD,1,50,0) && PORTB.RB0 ==0 && isPressed == 0){ isPressed = 1; while(PORTD.f1 == 0){counter = counter;} input = '7'; counter++; break; }
             PORTB.RB0 = 1;
 
-
+        }
         break;
             }
 
-              if(input == '0' ){lcd_out(2,1,"0"); }
-              if(input == '1' ){lcd_out(2,1,"1"); }
-              if(input == '2' ){lcd_out(2,1,"2"); }
-              if(input == '3' ){lcd_out(2,1,"3"); }
-              if(input == '4' ){lcd_out(2,1,"4"); }
-              if(input == '5' ){lcd_out(2,1,"5"); }
-              if(input == '6' ){lcd_out(2,1,"6"); }
-              if(input == '7' ){lcd_out(2,1,"7"); }
-              if(input == '8' ){lcd_out(2,1,"8"); }
-              if(input == '9' ){lcd_out(2,1,"9"); }
+              if(input == '0' ){Lcd_Out_Cp("0"); }
+              if(input == '1' ){Lcd_Out_Cp("1"); }
+              if(input == '2' ){Lcd_Out_Cp("2"); }
+              if(input == '3' ){Lcd_Out_Cp("3"); }
+              if(input == '4' ){Lcd_Out_Cp("4"); }
+              if(input == '5' ){Lcd_Out_Cp("5"); }
+              if(input == '6' ){Lcd_Out_Cp("6"); }
+              if(input == '7' ){Lcd_Out_Cp("7"); }
+              if(input == '8' ){Lcd_Out_Cp("8"); }
+              if(input == '9' ){Lcd_Out_Cp("9"); }
 
               isPressed = 0;
       }
