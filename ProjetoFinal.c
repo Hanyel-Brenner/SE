@@ -22,6 +22,9 @@ int Control = 0;
 void main() {
 char input;
 int current = 0, previous = 0;
+int isPressed = 0;
+int counter = 0;
+int pressedButton = -1;
 Lcd_Init();                               //Inicializa módulo LCD
  Lcd_Cmd(_LCD_CURSOR_OFF);                 //Apaga cursor
  Lcd_Cmd(_LCD_CLEAR);
@@ -37,42 +40,53 @@ PORTD.RD2 = 1;
 PORTD.RD1 = 1;
 PORTD.RD0 = 1;
 
+
    while(1){
       switch(Control){
          case 0:
+         
             PORTB.RB2 = 0;  //habilita primeira coluna do teclado
-            if(PORTB.RB2 == 0){
-              if(Button(&PORTD,3,100,0)){input = '1';}
-              if(Button(&PORTD,2,100,0)){input = '4';}
-              if(Button(&PORTD,1,100,0)){input = '7';}
-            }
+
+            if(Button(&PORTD,3,50,0) && PORTB.RB2 ==0 && isPressed == 0){input = '3'; isPressed = 1; }
+            if(Button(&PORTD,2,50,0) && PORTB.RB2 ==0 && isPressed == 0){input = '6'; isPressed = 1; }
+            if(Button(&PORTD,1,50,0) && PORTB.RB2 ==0 && isPressed == 0){input = '9'; isPressed = 1; }
+
             PORTB.RB2 = 1;
             PORTB.RB1 = 0;  //habilita segunda coluna do teclado
-            if(PORTB.RB1 == 0){
-              if(Button(&PORTD,3,100,0)){input = '2';}
-              if(Button(&PORTD,2,100,0)){input = '5';}
-              if(Button(&PORTD,1,100,0)){input = '8';}
-              if(Button(&PORTD,0,100,0)){input = '0';}
-            }
-            if(PORTB.RB0 == 0){
+
+            if(Button(&PORTD,3,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '2'; isPressed = 1; }
+            if(Button(&PORTD,2,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '5'; isPressed = 1; }
+            if(Button(&PORTD,1,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '8'; isPressed = 1; }
+            if(Button(&PORTD,0,50,0) && PORTB.RB1 ==0 && isPressed == 0){input = '0'; isPressed = 1; }
+
+
             PORTB.RB1 = 1;
             PORTB.RB0 = 0;  //habilita terceira coluna do teclado
-              if(Button(&PORTD,3,100,0)){input = '3';}
-              if(Button(&PORTD,2,100,0)){input = '6';}
-              if(Button(&PORTD,1,100,0)){input = '9';}
+              if(Button(&PORTD,3,50,0) && PORTB.RB0 ==0 && isPressed == 0){input = '1'; isPressed = 1; }
+              if(Button(&PORTD,2,50,0) && PORTB.RB0 ==0 && isPressed == 0){input = '4'; isPressed = 1; }
+              if(Button(&PORTD,1,50,0) && PORTB.RB0 ==0 && isPressed == 0){input = '7'; isPressed = 1; }
             PORTB.RB0 = 1;
-            }
+
+
         break;
             }
 
-              if(input == '0'){lcd_out(2,1,"0");}
-              if(input == '1'){lcd_out(2,1,"1");}
-              if(input == '2'){lcd_out(2,1,"2");}
-              if(input == '3'){lcd_out(2,1,"3");}
-              if(input == '4'){lcd_out(2,1,"4");}
-              if(input == '5'){lcd_out(2,1,"5");}
-              if(input == '6'){lcd_out(2,1,"6");}
-              if(input == '7'){lcd_out(2,1,"7");}
-              if(input == '8'){lcd_out(2,1,"8");}
-              if(input == '9'){lcd_out(2,1,"9");}
+              if(input == '0' ){lcd_out(2,1,"0"); }
+              if(input == '1' ){lcd_out(2,1,"1"); }
+              if(input == '2' ){lcd_out(2,1,"2"); }
+              if(input == '3' ){lcd_out(2,1,"3"); }
+              if(input == '4' ){lcd_out(2,1,"4"); }
+              if(input == '5' ){lcd_out(2,1,"5"); }
+              if(input == '6' ){lcd_out(2,1,"6"); }
+              if(input == '7' ){lcd_out(2,1,"7"); }
+              if(input == '8' ){lcd_out(2,1,"8"); }
+              if(input == '9' ){lcd_out(2,1,"9"); }
+
+              isPressed = 0;
       }
+
+
+
+
+
+}
